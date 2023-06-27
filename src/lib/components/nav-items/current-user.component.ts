@@ -12,6 +12,14 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'abp-current-user',
   templateUrl: './current-user.component.html',
+  styles: [
+    `
+      .avatar {
+        width: 24px;
+        height: 24px;
+      }
+    `,
+  ],
 })
 export class CurrentUserComponent {
   currentUser$: Observable<CurrentUserDto> = this.configState.getOne$('currentUser');

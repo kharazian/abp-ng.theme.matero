@@ -2,9 +2,9 @@ export const enum eThemeMateroComponents {
   ApplicationLayout = 'Theme.ApplicationLayoutComponent',
   AccountLayout = 'Theme.AccountLayoutComponent',
   EmptyLayout = 'Theme.EmptyLayoutComponent',
-  Logo = 'Theme.LogoComponent',
+  Logo = 'Theme.LogoComponent',//
   Routes = 'Theme.RoutesComponent',
-  NavItems = 'Theme.NavItemsComponent',
-  CurrentUser = 'Theme.CurrentUserComponent',
-  Languages = 'Theme.LanguagesComponent',
+  NavItems = 'Theme.NavItemsComponent',//
+  CurrentUser = 'Theme.CurrentUserComponent',//
+  Languages = 'Theme.LanguagesComponent',//
 }
