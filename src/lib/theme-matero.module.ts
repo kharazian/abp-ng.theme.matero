@@ -29,8 +29,6 @@ import { MaterialModule} from "./material.module";
 import { HeaderComponent } from "./components/header/header.component";
 // import { BrandingComponent } from "./components/widgets/branding.component";
 import { NotificationComponent } from "./components/widgets/notification.component";
-import { TranslateComponent } from "./components/widgets/translate.component";
-// import { UserComponent } from "./components/widgets/user.component";
 
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
@@ -49,8 +47,6 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     HeaderComponent,
     // BrandingComponent,
     NotificationComponent,
-    TranslateComponent,
-    // UserComponent
   ],
   exports: [
     ...LAYOUTS,

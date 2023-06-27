@@ -8,7 +8,5 @@ import { Component, Input, TrackByFunction } from '@angular/core';
 export class NavItemsComponent {
   trackByFn: TrackByFunction<NavItem> = (_, element) => element.id;
 
-  constructor(public readonly navItems: NavItemsService) {
-    debugger;
-  }
+  constructor(public readonly navItems: NavItemsService) {}
 }

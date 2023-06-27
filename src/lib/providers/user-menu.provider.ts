@@ -24,7 +24,25 @@ export function configureUserMenu(injector: Injector) {
         order: 100,
         textTemplate: {
           text: 'AbpAccount::MyAccount',
-          icon: 'fa fa-cog',
+          icon: 'account_circle',
+        },
+        action: () => navigateToManageProfile(),
+      },
+      {
+        id: eUserMenuItems.ResetSetting,
+        order: 100,
+        textTemplate: {
+          text: 'AbpAccount::ResetSetting',
+          icon: 'restore',
+        },
+        action: () => navigateToManageProfile(),
+      },
+      {
+        id: eUserMenuItems.ChangePassword,
+        order: 100,
+        textTemplate: {
+          text: 'AbpAccount::ChangePassword',
+          icon: 'security',
         },
         action: () => navigateToManageProfile(),
       },
@@ -33,7 +51,7 @@ export function configureUserMenu(injector: Injector) {
         order: 101,
         textTemplate: {
           text: 'AbpUi::Logout',
-          icon: 'fa fa-power-off',
+          icon: 'exit_to_app',
         },
         action: () => {
           authService.logout().subscribe();

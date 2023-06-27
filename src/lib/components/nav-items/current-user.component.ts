@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class CurrentUserComponent {
   currentUser$: Observable<CurrentUserDto> = this.configState.getOne$('currentUser');
   selectedTenant$ = this.sessionState.getTenant$();
-
+  defaultAvatar = './assets/images/avatar.jpg';
   trackByFn: TrackByFunction<UserMenu> = (_, element) => element.id;
 
   get smallScreen(): boolean {
@@ -28,7 +28,7 @@ export class CurrentUserComponent {
     public readonly userMenu: UserMenuService,
     private authService: AuthService,
     private configState: ConfigStateService,
-    private sessionState: SessionStateService,
+    private sessionState: SessionStateService
   ) {}
 
   navigateToLogin() {

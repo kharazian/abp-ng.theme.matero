@@ -3,8 +3,43 @@
     'AbpAccount::Login' | abpLocalization
   }}</a>
 </ng-template>
+<ng-container *ngIf="(currentUser$ | async)?.isAuthenticated; else loginBtn">
+  <button class="r-full" mat-button [matMenuTriggerFor]="menu">
+    <img matButtonIcon class="avatar r-full" [src]="(currentUser$ | async)?.avatar || defaultAvatar" width="24" alt="avatar" />
+    <small *ngIf="(selectedTenant$ | async)?.name as tenantName"><i>{{ tenantName }}</i>\</small>
+    <strong class="m-x-8">{{ (currentUser$ | async)?.userName }}</strong>
+  </button>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let item of userMenu.items$ | async; trackBy: trackByFn">
+      <ng-container *abpVisible="!item.visible || item.visible(item)">
+        <li class="nav-item d-flex align-items-center" *abpPermission="item.requiredPolicy">
+          <ng-container
+            *ngIf="item.component; else htmlTemplate"
+            [ngComponentOutlet]="item.component"
+            [ngComponentOutletInjector]="item | toInjector"
+          ></ng-container>
+
+          <ng-template #htmlTemplate>
+            <div
+              *ngIf="item.html; else textTemplate"
+              [innerHTML]="item.html"
+              (click)="item.action ? item.action() : null"
+            ></div>
+          </ng-template>
+
+          <ng-template #textTemplate>
+            <button mat-menu-item (click)="item.action ? item.action() : null">
+              <mat-icon *ngIf="item.textTemplate.icon">{{ item.textTemplate.icon }}</mat-icon>
+              <span> {{ item.textTemplate.text | abpLocalization }}</span>
+            </button>
+          </ng-template>
+        </li>
+      </ng-container>
+    </ng-container>
+  </mat-menu>
+</ng-container>
 <div
-  *ngIf="(currentUser$ | async)?.isAuthenticated; else loginBtn"
+  **ngIf="false"
   ngbDropdown
   class="dropdown"
   #currentUserDropdown="ngbDropdown"
@@ -19,10 +54,6 @@
     data-toggle="dropdown"
     aria-haspopup="true"
     aria-expanded="false"
-  >
-    <small *ngIf="(selectedTenant$ | async)?.name as tenantName"
-      ><i>{{ tenantName }}</i
-      >\</small
     >
     <strong>{{ (currentUser$ | async)?.userName }}</strong>
   </a>

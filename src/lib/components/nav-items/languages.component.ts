@@ -6,39 +6,18 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'abp-languages',
   template: `
-    <div
-      *ngIf="((dropdownLanguages$ | async)?.length || 0) > 0"
-      class="dropdown"
-      ngbDropdown
-      #languageDropdown="ngbDropdown"
-      display="static"
-    >
-      <a
-        ngbDropdownToggle
-        class="nav-link"
-        href="javascript:void(0)"
-        role="button"
-        id="dropdownMenuLink"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        {{ defaultLanguage$ | async }}
-      </a>
-      <div
-        class="dropdown-menu dropdown-menu-end border-0 shadow-sm"
-        aria-labelledby="dropdownMenuLink"
-        [class.d-block]="smallScreen && languageDropdown.isOpen()"
-      >
-        <a
-          *ngFor="let lang of dropdownLanguages$ | async"
-          href="javascript:void(0)"
-          class="dropdown-item"
-          (click)="onChangeLang(lang.cultureName || '')"
-          >{{ lang?.displayName }}</a
-        >
-      </div>
-    </div>
+    <ng-container *ngIf="((dropdownLanguages$ | async)?.length || 0) > 0">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>translate</mat-icon>
+      </button>
+    </ng-container>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item *ngFor="let lang of dropdownLanguages$ | async" (click)="onChangeLang(lang.cultureName || '')">
+        <span [ngStyle]="{ color: (lang?.displayName === (defaultLanguage$ | async)) ? 'blue' : 'rgba(0,0,0,.54)' }">
+        {{ lang?.displayName}}
+        </span>
+      </button>
+    </mat-menu>
   `,
 })
 export class LanguagesComponent {
@@ -58,11 +37,7 @@ export class LanguagesComponent {
   }
 
   get dropdownLanguages$(): Observable<LanguageInfo[]> {
-    return this.languages$.pipe(
-      map(
-        languages => languages?.filter(lang => lang.cultureName !== this.selectedLangCulture) || [],
-      ),
-    );
+    return this.languages$;
   }
 
   get selectedLangCulture(): string {
