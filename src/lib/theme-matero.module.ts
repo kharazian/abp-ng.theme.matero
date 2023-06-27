@@ -25,6 +25,13 @@ import { MATERO_THEME_NAV_ITEM_PROVIDERS } from './providers/nav-item.provider';
 import { MATERO_THEME_STYLES_PROVIDERS } from './providers/styles.provider';
 import { MATERO_THEME_USER_MENU_PROVIDERS } from './providers/user-menu.provider';
 
+import { MaterialModule} from "./material.module";
+import { HeaderComponent } from "./components/header/header.component";
+// import { BrandingComponent } from "./components/widgets/branding.component";
+import { NotificationComponent } from "./components/widgets/notification.component";
+import { TranslateComponent } from "./components/widgets/translate.component";
+// import { UserComponent } from "./components/widgets/user.component";
+
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
 @NgModule({
@@ -39,6 +46,11 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     PageAlertContainerComponent,
     TenantBoxComponent,
     AuthWrapperComponent,
+    HeaderComponent,
+    // BrandingComponent,
+    NotificationComponent,
+    TranslateComponent,
+    // UserComponent
   ],
   exports: [
     ...LAYOUTS,
@@ -49,6 +61,7 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     CurrentUserComponent,
     LanguagesComponent,
     PageAlertContainerComponent,
+    HeaderComponent,
   ],
   imports: [
     CoreModule,
@@ -56,6 +69,7 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     NgbCollapseModule,
     NgbDropdownModule,
     NgxValidateCoreModule,
+    MaterialModule,
   ],
 })
 export class BaseThemeMateroModule {}
