@@ -12,6 +12,7 @@
   ],
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
     "target": "es2020"
   }
 }
