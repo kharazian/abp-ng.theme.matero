@@ -1,4 +1,4 @@
-import {RouterEvents, SubscriptionService} from '@abp/ng.core';
+import { RouterEvents, SubscriptionService } from '@abp/ng.core';
 import { ChangeDetectorRef, Injectable } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -16,12 +16,26 @@ export class LayoutService {
 
   navItemsComponentKey = eThemeMateroComponents.NavItems;
 
-  constructor(private subscription: SubscriptionService,
-              private cdRef: ChangeDetectorRef,
-              routerEvents:RouterEvents) {
-    subscription.addOne(routerEvents.getNavigationEvents("End"),() => {
+  options: AppSettings = {
+    navPos: 'side',
+    dir: 'ltr',
+    theme: 'light',
+    showHeader: true,
+    headerPos: 'fixed',
+    showUserPanel: true,
+    sidenavOpened: true,
+    sidenavCollapsed: true,
+    language: 'en-CA',
+  };
+
+  constructor(
+    private subscription: SubscriptionService,
+    private cdRef: ChangeDetectorRef,
+    routerEvents: RouterEvents
+  ) {
+    subscription.addOne(routerEvents.getNavigationEvents('End'), () => {
       this.isCollapsed = true;
-    })
+    });
   }
 
   private checkWindowWidth() {
@@ -43,3 +57,27 @@ export class LayoutService {
     this.subscription.addOne(resize$, () => this.checkWindowWidth());
   }
 }
+
+export interface AppSettings {
+  navPos: 'side' | 'top';
+  dir: 'ltr' | 'rtl';
+  theme: 'light' | 'dark' | 'auto';
+  showHeader: boolean;
+  headerPos: 'fixed' | 'static' | 'above';
+  showUserPanel: boolean;
+  sidenavOpened: boolean;
+  sidenavCollapsed: boolean;
+  language: string;
+}
+
+export const defaults: AppSettings = {
+  navPos: 'side',
+  dir: 'ltr',
+  theme: 'light',
+  showHeader: true,
+  headerPos: 'fixed',
+  showUserPanel: true,
+  sidenavOpened: true,
+  sidenavCollapsed: true,
+  language: 'en-CA',
+};

@@ -1,5 +1,17 @@
-<div class="crm-container-wrap">
-  <app-header></app-header>
+<div class="crm-container-wrap"
+     [ngClass]="{
+        'crm-sidenav-collapsed': options.sidenavCollapsed && options.navPos !== 'top',
+        'crm-navbar-side': options.navPos === 'side',
+        'crm-navbar-top': options.navPos === 'top',
+        'crm-header-above': options.headerPos === 'above',
+        'crm-header-fixed': options.headerPos === 'fixed',
+        'crm-header-white': options.theme !== 'dark'
+      }"
+     [dir]="options.dir">
+  <!-- Header Above -->
+  <app-header>
+  </app-header>
+
   <!-- [@slideFromBottom]="outlet.isActivated && outlet.activatedRoute?.routeConfig?.path" TODO: throws ExpressionChangedAfterItHasBeenCheck when animation is active. It should be fixed -->
   <div class="container">
     <abp-page-alert-container></abp-page-alert-container>

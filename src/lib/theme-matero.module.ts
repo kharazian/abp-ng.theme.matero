@@ -27,7 +27,6 @@ import { MATERO_THEME_USER_MENU_PROVIDERS } from './providers/user-menu.provider
 
 import { MaterialModule} from "./material.module";
 import { HeaderComponent } from "./components/header/header.component";
-// import { BrandingComponent } from "./components/widgets/branding.component";
 import { NotificationComponent } from "./components/widgets/notification.component";
 
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
@@ -45,7 +44,6 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     TenantBoxComponent,
     AuthWrapperComponent,
     HeaderComponent,
-    // BrandingComponent,
     NotificationComponent,
   ],
   exports: [
