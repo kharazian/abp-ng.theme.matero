@@ -5,30 +5,9 @@
     style="min-height: 4rem"
   >
     <div class="container">
-      <abp-logo *abpReplaceableTemplate="{ componentKey: service.logoComponentKey }"></abp-logo>
-      <button
-        class="navbar-toggler"
-        type="button"
-        [attr.aria-expanded]="!service.isCollapsed"
-        (click)="service.isCollapsed = !service.isCollapsed"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="navbar-collapse"
-        [class.overflow-hidden]="service.smallScreen"
-        id="main-navbar-collapse"
-      >
-        <ng-container *ngTemplateOutlet="!service.smallScreen ? navigations : null"></ng-container>
 
-        <div
-          *ngIf="service.smallScreen"
-          [@collapseWithMargin]="service.isCollapsed ? 'collapsed' : 'expanded'"
-        >
-          <ng-container *ngTemplateOutlet="navigations"></ng-container>
-        </div>
 
-        <ng-template #navigations>
+
           <abp-routes
             *abpReplaceableTemplate="{
               componentKey: service.routesComponentKey,
@@ -40,13 +19,7 @@
             [smallScreen]="service.smallScreen"
           ></abp-routes>
 
-          <abp-nav-items
-            *abpReplaceableTemplate="{
-              componentKey: service.navItemsComponentKey
-            }"
-          ></abp-nav-items>
-        </ng-template>
-      </div>
+
     </div>
   </nav>
 

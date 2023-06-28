@@ -28,6 +28,11 @@ import { MATERO_THEME_USER_MENU_PROVIDERS } from './providers/user-menu.provider
 import { MaterialModule} from "./material.module";
 import { HeaderComponent } from "./components/header/header.component";
 import { NotificationComponent } from "./components/widgets/notification.component";
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { UserPanelComponent } from "./components/sidebar/user-panel.component";
+import { SidemenuComponent } from "./components/sidemenu/sidemenu.component";
+import { SidebarNoticeComponent } from "./components/sidebar-notice/sidebar-notice.component";
+import { TopmenuComponent } from "./components/topmenu/topmenu.component";
 
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
@@ -45,6 +50,11 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     AuthWrapperComponent,
     HeaderComponent,
     NotificationComponent,
+    SidebarComponent,
+    UserPanelComponent,
+    SidemenuComponent,
+    SidebarNoticeComponent,
+    TopmenuComponent,
   ],
   exports: [
     ...LAYOUTS,

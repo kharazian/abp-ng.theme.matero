@@ -4,9 +4,9 @@
 @use '../style/reboot-theme';
 @use '../components/header/header-theme';
 @use '../components/sidebar/sidebar-theme';
-// @use '../app/theme/sidemenu/sidemenu-theme';
-// @use '../app/theme/topmenu/topmenu-theme';
-// @use '../app/shared/components/error-code/error-code-theme';
+@use '../components/sidemenu/sidemenu-theme';
+@use '../components/topmenu/topmenu-theme';
+// @use '../components/components/error-code/error-code-theme';
 
 // @use './custom/table-theme';
 
@@ -16,14 +16,14 @@
 
 // Styles for the app that are based on the current theme.
 @mixin theme($theme) {
-  // @include mat.all-component-themes($theme);
+  @include mat.all-component-themes($theme);
   // @include mtx.all-component-themes($theme);
 
-  // @include reboot-theme.theme($theme);
-  // @include header-theme.theme($theme);
-  // @include sidebar-theme.theme($theme);
-  // @include sidemenu-theme.theme($theme);
-  // @include topmenu-theme.theme($theme);
+  @include reboot-theme.theme($theme);
+  @include header-theme.theme($theme);
+  @include sidebar-theme.theme($theme);
+  @include sidemenu-theme.theme($theme);
+  @include topmenu-theme.theme($theme);
   // @include error-code-theme.theme($theme);
 
   // @include table-theme.theme($theme);
