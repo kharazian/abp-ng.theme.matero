@@ -5,6 +5,7 @@ import { LayoutService } from '../../services/layout.service';
 @Component({
   selector: 'abp-layout-account',
   templateUrl: './account-layout.component.html',
+  styleUrls: ['./account-layout.component.scss'],
   providers: [LayoutService, SubscriptionService],
 })
 export class AccountLayoutComponent implements AfterViewInit {

@@ -26,6 +26,8 @@ const MONITOR_MEDIAQUERY = 'screen and (min-width: 1920px)';
 @Component({
   selector: 'abp-layout-application',
   templateUrl: './application-layout.component.html',
+  styleUrls: ['./application-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [slideFromBottom, collapseWithMargin],
   providers: [LayoutService, SubscriptionService],
 })

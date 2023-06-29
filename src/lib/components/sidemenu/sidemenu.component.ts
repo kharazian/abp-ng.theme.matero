@@ -13,7 +13,7 @@ export class SidemenuComponent {
   // Note: Ripple effect make page flashing on mobile
   @Input() ripple = false;
 
-  @ViewChildren('childrenContainer') childrenContainers!: QueryList<ElementRef<HTMLDivElement>>;
+  @ViewChildren('crmDropdownToggle') crmDropdownToggle!: QueryList<ElementRef<HTMLUListElement>>;
 
   rootDropdownExpand = {} as { [key: string]: boolean };
 
@@ -25,14 +25,34 @@ export class SidemenuComponent {
     );
   }
 
+
+  dropdownExpand(node: TreeNode<ABP.Route>) {
+    this.rootDropdownExpand[node.name] = !this.rootDropdownExpand[node.name];
+    this.closeDropdown();
+  }
+
+  nodeLevel(node: TreeNode<ABP.Route>) {
+    let level = 0;
+    let tempNode = node;
+    while(tempNode.parent){
+      level++;
+      tempNode = tempNode.parent;
+    }
+    return level;
+  }
+
   isDropdown(node: TreeNode<ABP.Route>) {
     return !node?.isLeaf || this.routesService.hasChildren(node.name);
   }
 
   closeDropdown() {
-    this.childrenContainers.forEach(({ nativeElement }) => {
-      this.renderer.addClass(nativeElement, 'expanded');
-      setTimeout(() => this.renderer.removeClass(nativeElement, 'expanded'), 0);
+    this.crmDropdownToggle.forEach(({ nativeElement }) => {
+      if(this.rootDropdownExpand[nativeElement.getAttribute('type')]){
+        this.renderer.addClass(nativeElement, 'expanded');
+      }
+      else {
+        this.renderer.removeClass(nativeElement, 'expanded');
+      }
     });
   }
 }
