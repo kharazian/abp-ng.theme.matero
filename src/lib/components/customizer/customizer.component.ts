@@ -3,13 +3,12 @@ import {
   Output,
   EventEmitter,
   ViewEncapsulation,
-  TemplateRef,
+  ViewChild,
   OnInit,
   OnDestroy,
 } from '@angular/core';
 import { AppSettings, LayoutService } from '../../services/layout.service';
-import { CdkDragStart } from '@angular/cdk/drag-drop';
-// import { MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
+import { MatSidenav } from '@angular/material/sidenav';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
@@ -21,6 +20,7 @@ import { Subscription } from 'rxjs';
 })
 export class CustomizerComponent implements OnInit, OnDestroy {
   @Output() optionsChange = new EventEmitter<AppSettings>();
+  @ViewChild('customizerPanel') customizerPanel: MatSidenav;
 
   options = this.layoutService.options;
 
@@ -68,27 +68,12 @@ export class CustomizerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.formSubscription.unsubscribe();
-  }
-
-  onDragStart(event: CdkDragStart) {
-    this.dragging = true;
-  }
-
-  openPanel(templateRef: TemplateRef<any>) {
-    if (this.dragging) {
-      this.dragging = false;
-      return;
-    }
-
-    // this.drawerRef = this.drawer.open(templateRef, {
-    //   position: this.form.get('dir')?.value === 'rtl' ? 'left' : 'right',
-    //   width: '320px',
-    // });
   }
 
   closePanel() {
-    // this.drawerRef?.dismiss();
+    if (this.customizerPanel.opened) {
+      this.customizerPanel.close();
+    }
   }
 
   sendOptions(options: AppSettings) {
