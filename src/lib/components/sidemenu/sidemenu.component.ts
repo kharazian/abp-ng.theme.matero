@@ -1,4 +1,13 @@
-import { Component, ElementRef, Input, QueryList, Renderer2, TrackByFunction, ViewChildren, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  QueryList,
+  Renderer2,
+  TrackByFunction,
+  ViewChildren,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ABP, RoutesService, TreeNode } from '@abp/ng.core';
 
 // import { MenuService } from '@core';
@@ -19,12 +28,7 @@ export class SidemenuComponent {
 
   trackByFn: TrackByFunction<TreeNode<ABP.Route>> = (_, item) => item.name;
 
-  constructor(public readonly routesService: RoutesService, protected renderer: Renderer2) {
-    routesService.visible$.subscribe(
-      x => console.log(x)
-    );
-  }
-
+  constructor(public readonly routesService: RoutesService, protected renderer: Renderer2) {}
 
   dropdownExpand(node: TreeNode<ABP.Route>) {
     this.rootDropdownExpand[node.name] = !this.rootDropdownExpand[node.name];
@@ -34,7 +38,7 @@ export class SidemenuComponent {
   nodeLevel(node: TreeNode<ABP.Route>) {
     let level = 0;
     let tempNode = node;
-    while(tempNode.parent){
+    while (tempNode.parent) {
       level++;
       tempNode = tempNode.parent;
     }
@@ -47,10 +51,9 @@ export class SidemenuComponent {
 
   closeDropdown() {
     this.crmDropdownToggle.forEach(({ nativeElement }) => {
-      if(this.rootDropdownExpand[nativeElement.getAttribute('type')]){
+      if (this.rootDropdownExpand[nativeElement.getAttribute('type')]) {
         this.renderer.addClass(nativeElement, 'expanded');
-      }
-      else {
+      } else {
         this.renderer.removeClass(nativeElement, 'expanded');
       }
     });

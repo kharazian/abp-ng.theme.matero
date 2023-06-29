@@ -25,7 +25,9 @@ import { MATERO_THEME_NAV_ITEM_PROVIDERS } from './providers/nav-item.provider';
 import { MATERO_THEME_STYLES_PROVIDERS } from './providers/styles.provider';
 import { MATERO_THEME_USER_MENU_PROVIDERS } from './providers/user-menu.provider';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MaterialModule} from "./material.module";
+
 import { HeaderComponent } from "./components/header/header.component";
 import { NotificationComponent } from "./components/widgets/notification.component";
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -33,7 +35,7 @@ import { UserPanelComponent } from "./components/sidebar/user-panel.component";
 import { SidemenuComponent } from "./components/sidemenu/sidemenu.component";
 import { SidebarNoticeComponent } from "./components/sidebar-notice/sidebar-notice.component";
 import { TopmenuComponent } from "./components/topmenu/topmenu.component";
-
+import { CustomizerComponent } from "./components/customizer/customizer.component";
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
 @NgModule({
@@ -55,6 +57,7 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     SidemenuComponent,
     SidebarNoticeComponent,
     TopmenuComponent,
+    CustomizerComponent,
   ],
   exports: [
     ...LAYOUTS,
@@ -74,6 +77,7 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     NgbDropdownModule,
     NgxValidateCoreModule,
     MaterialModule,
+    DragDropModule,
   ],
 })
 export class BaseThemeMateroModule {}
