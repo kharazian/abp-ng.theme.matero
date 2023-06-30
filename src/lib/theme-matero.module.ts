@@ -35,6 +35,7 @@ import { UserPanelComponent } from "./components/sidebar/user-panel.component";
 import { SidemenuComponent } from "./components/sidemenu/sidemenu.component";
 import { SidebarNoticeComponent } from "./components/sidebar-notice/sidebar-notice.component";
 import { TopmenuComponent } from "./components/topmenu/topmenu.component";
+import { TopmenuPanelComponent } from "./components/topmenu/topmenu-panel.component";
 import { CustomizerComponent } from "./components/customizer/customizer.component";
 export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, EmptyLayoutComponent];
 
@@ -57,6 +58,7 @@ export const LAYOUTS = [ApplicationLayoutComponent, AccountLayoutComponent, Empt
     SidemenuComponent,
     SidebarNoticeComponent,
     TopmenuComponent,
+    TopmenuPanelComponent,
     CustomizerComponent,
   ],
   exports: [
