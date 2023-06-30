@@ -35,8 +35,8 @@
       <app-sidebar-notice></app-sidebar-notice>
     </mat-sidenav>
 
-    <mat-sidenav #customizerPanel2 position="end" mode="over">
-      <app-customizer></app-customizer>
+    <mat-sidenav #customizerPanel position="end" mode="over">
+      <app-customizer (optionsChange)="receiveOptions($event)"></app-customizer>
     </mat-sidenav>
 
     <mat-sidenav-content #content class="crm-content-wrap">
@@ -58,7 +58,7 @@
   <!-- Demo purposes only -->
 
   <div class="customizer-handle" matTooltip="Drag me around" cdkDrag>
-    <button mat-fab (click)="customizerPanel2.toggle()">
+    <button mat-fab (click)="customizerPanel.toggle()">
       <mat-icon aria-label="Example icon-button with a settings icon">settings</mat-icon>
     </button>
   </div>
