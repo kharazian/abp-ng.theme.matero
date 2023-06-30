@@ -1,13 +1,16 @@
-import { Component, HostBinding, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { NavigationEnd, Router, RouterLinkActive } from '@angular/router';
-// import { Menu, MenuService } from '@core';
+import {
+  Component,
+  ElementRef,
+  QueryList,
+  Renderer2,
+  TrackByFunction,
+  ViewChildren,
+  ViewEncapsulation,
+  HostBinding,
+} from '@angular/core';
+import { RouterLinkActive } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-
-export interface TopmenuState {
-  active: boolean;
-  route: string;
-}
+import { ABP, RoutesService, TreeNode } from '@abp/ng.core';
 
 @Component({
   selector: 'app-topmenu',
@@ -15,35 +18,47 @@ export interface TopmenuState {
   styleUrls: ['./topmenu.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class TopmenuComponent implements OnDestroy {
+export class TopmenuComponent {
   @HostBinding('class') class = 'crm-topmenu';
-
-  // menu$ = this.menu.getAll();
-
-  // buildRoute = this.menu.buildRoute;
-
-  // menuList: Menu[] = [];
-  menuStates: TopmenuState[] = [];
 
   private menuSubscription = Subscription.EMPTY;
   private routerSubscription = Subscription.EMPTY;
 
-  constructor(){}
-  //   private menu: MenuService, private router: Router) {
-  //   this.menuSubscription = this.menu$.subscribe(res => {
-  //     this.menuList = res;
-  //     this.menuList.forEach(item => {
-  //       this.menuStates.push({
-  //         active: this.router.url.split('/').includes(item.route),
-  //         route: item.route,
-  //       });
-  //     });
-  //   });
-  // }
+  @ViewChildren('crmDropdownToggle') crmDropdownToggle!: QueryList<ElementRef<HTMLUListElement>>;
 
-  ngOnDestroy() {
-    this.menuSubscription.unsubscribe();
-    this.routerSubscription.unsubscribe();
+  rootDropdownExpand = {} as { [key: string]: boolean };
+
+  trackByFn: TrackByFunction<TreeNode<ABP.Route>> = (_, item) => item.name;
+
+  constructor(public readonly routesService: RoutesService, protected renderer: Renderer2) {}
+
+  dropdownExpand(node: TreeNode<ABP.Route>) {
+    this.rootDropdownExpand[node.name] = !this.rootDropdownExpand[node.name];
+    this.closeDropdown();
+  }
+
+  nodeLevel(node: TreeNode<ABP.Route>) {
+    let level = 0;
+    let tempNode = node;
+    while (tempNode.parent) {
+      level++;
+      tempNode = tempNode.parent;
+    }
+    return level;
+  }
+
+  isDropdown(node: TreeNode<ABP.Route>) {
+    return !node?.isLeaf || this.routesService.hasChildren(node.name);
+  }
+
+  closeDropdown() {
+    this.crmDropdownToggle.forEach(({ nativeElement }) => {
+      if (this.rootDropdownExpand[nativeElement.getAttribute('type')]) {
+        this.renderer.addClass(nativeElement, 'expanded');
+      } else {
+        this.renderer.removeClass(nativeElement, 'expanded');
+      }
+    });
   }
 
   onRouteChange(rla: RouterLinkActive, index: number) {

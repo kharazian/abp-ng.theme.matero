@@ -1,49 +1,76 @@
 <!-- <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <ng-container *ngFor="let menuItem of menu$ | async; let index=index">
-    <ng-template [ngxPermissionsOnly]="menuItem.permissions?.only!"
-                 [ngxPermissionsExcept]="menuItem.permissions?.except!">
-
-      <a *ngIf="menuItem.type === 'link'" mat-button
-         [routerLink]="buildRoute([menuItem.route])" routerLinkActive="active">
-        <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{item: menuItem}">
-        </ng-container>
-      </a>
-
-      <a *ngIf="menuItem.type === 'extLink'" mat-button [href]="menuItem.route">
-        <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{item: menuItem}">
-        </ng-container>
-      </a>
-
-      <a *ngIf="menuItem.type === 'extTabLink'" mat-button [href]="menuItem.route" target="_blank">
-        <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{item: menuItem}">
-        </ng-container>
-      </a>
-
-      <button *ngIf="menuItem.type === 'sub'" mat-button
-              [matMenuTriggerFor]="submenu.menuPanel" routerLinkActive="active"
-              [class.active]="menuStates[index].active">
-        <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{item: menuItem}">
-        </ng-container>
-
-        <app-topmenu-panel #submenu
-                           [items]="menuItem.children!"
-                           [parentRoute]="[menuItem.route]"
-                           [level]="1"
-                           (routeChange)="onRouteChange($event, index)">
-        </app-topmenu-panel>
-      </button>
-
-    </ng-template>
+  <ng-container
+    *ngFor="let menuItem of routesService.visible$ | async; trackBy: trackByFn; let index = index"
+  >
+    <ng-container
+      *abpPermission="menuItem.requiredPolicy || ''"
+      [ngTemplateOutlet]="isDropdown(menuItem) ? dropdownLink : defaultLink"
+      [ngTemplateOutletContext]="{ $implicit: menuItem }"
+    >
+    </ng-container>
   </ng-container>
 </nav>
-<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel> -->
 
-<ng-template #linkTypeTpl let-item="item" let-level="level">
-  <mat-icon class="menu-icon">{{item.icon}}</mat-icon>
-  <span class="menu-name">{{item.name | translate}}</span>
-  <span class="menu-label bg-{{item.label.color}}" *ngIf="item.label">{{item.label.value}}</span>
-  <span class="menu-badge bg-{{item.badge.color}}" *ngIf="item.badge">{{item.badge.value}}</span>
-  <mat-icon class="menu-caret" *ngIf="item.type!=='link'">
-    {{item.type==='sub' ? 'arrow_drop_down' : 'launch'}}
+<ng-template #defaultLink let-menuItem>
+  <a mat-button [routerLink]="[menuItem.path]" routerLinkActive="active">
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: menuItem }">
+    </ng-container>
+  </a>
+</ng-template>
+
+<ng-template #dropdownLink let-menuItem>
+  <button
+    class="menu-heading menu-toggle"
+    matRipple
+    [matRippleDisabled]="!ripple"
+    (click)="dropdownExpand(menuItem)"
+  >
+    <ng-container
+      [ngTemplateOutlet]="linkTypeTpl"
+      [ngTemplateOutletContext]="{ $implicit: menuItem }"
+    >
+    </ng-container>
+  </button>
+
+  <ng-container
+    *ngIf="menuItem.children.length > 0"
+    [ngTemplateOutlet]="menuListTpl"
+    [ngTemplateOutletContext]="{
+      menuList: menuItem.children,
+      level: level + 1
+    }"
+  >
+  </ng-container>
+
+  <button
+    mat-button
+    routerLinkActive="active"
+    [class.active]="dropdownExpand(menuItem)"
+  >
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: menuItem }">
+    </ng-container>
+
+    <!-- <app-topmenu-panel #submenu
+                       [items]="menuItem.children!"
+                       [parentRoute]="[menuItem.route]"
+                       [level]="1"
+                       (routeChange)="onRouteChange($event, index)">
+    </app-topmenu-panel> -->
+  </button>
+</ng-template>
+
+<ng-template #linkTypeTpl let-menuItem>
+  <i class="menu-icon" *ngIf="!menuItem.parent" [ngClass]="menuItem.iconClass"></i>
+  <!-- <mat-icon class="menu-icon" *ngIf="level === 0">{{ menuItem.iconClass }}</mat-icon> -->
+  <span class="menu-name">{{ menuItem.name | abpLocalization }}</span>
+  <!-- <span class="menu-label bg-{{ menuItem.label.color }}" *ngIf="menuItem.label">{{
+    menuItem.label.value
+  }}</span>
+  <span class="menu-badge bg-{{ menuItem.badge.color }}" *ngIf="menuItem.badge">{{
+    menuItem.badge.value
+  }}</span> -->
+  <mat-icon class="menu-caret" *ngIf="!menuItem.isLeaf">
+    {{ 'arrow_drop_down' }}
   </mat-icon>
-</ng-template> -->
+</ng-template>

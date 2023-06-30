@@ -31,12 +31,9 @@
       </app-sidebar>
     </mat-sidenav>
 
-    <mat-sidenav #sidenavNotice position="end" mode="over">
-      <app-sidebar-notice></app-sidebar-notice>
-    </mat-sidenav>
-
-    <mat-sidenav #customizerPanel position="end" mode="over">
-      <app-customizer (optionsChange)="receiveOptions($event)"></app-customizer>
+    <mat-sidenav #sidenavEnd position="end" mode="over">
+      <app-sidebar-notice *ngIf="sideNavEndComponent == 'notice'"></app-sidebar-notice>
+      <app-customizer *ngIf="sideNavEndComponent == 'customizer'" (optionsChange)="receiveOptions($event)" (closePanel)="customizerPanel.toggle()"></app-customizer>
     </mat-sidenav>
 
     <mat-sidenav-content #content class="crm-content-wrap">
@@ -44,7 +41,7 @@
                   [showToggle]="!options.sidenavCollapsed && options.navPos !== 'top'"
                   [showBranding]="options.navPos === 'top'"
                   (toggleSidenav)="sidenav.toggle()"
-                  (toggleSidenavNotice)="sidenavNotice.toggle()">
+                  (toggleSidenavNotice)="sideNavEndOpen('notice')">
       </app-header>
 
       <app-topmenu *ngIf="options.navPos === 'top'"></app-topmenu>
@@ -58,7 +55,7 @@
   <!-- Demo purposes only -->
 
   <div class="customizer-handle" matTooltip="Drag me around" cdkDrag>
-    <button mat-fab (click)="customizerPanel.toggle()">
+    <button mat-fab (click)="sideNavEndOpen('customizer')">
       <mat-icon aria-label="Example icon-button with a settings icon">settings</mat-icon>
     </button>
   </div>

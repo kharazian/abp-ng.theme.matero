@@ -22,7 +22,7 @@
       #crmDropdownToggle
     >
       <ng-container *abpPermission="menuItem.requiredPolicy || ''"
-        [ngTemplateOutlet]="isDropdown(menuItem) ? dropdownLink2 : defaultLink2"
+        [ngTemplateOutlet]="isDropdown(menuItem) ? dropdownLink : defaultLink"
         [ngTemplateOutletContext]="{ $implicit: menuItem }"
       >
       </ng-container>
@@ -30,7 +30,7 @@
   </ul>
 </ng-template>
 
-<ng-template #defaultLink2 let-menuItem>
+<ng-template #defaultLink let-menuItem>
   <a class="menu-heading" [routerLink]="[menuItem.path]" matRipple [matRippleDisabled]="!ripple">
     <ng-container
       [ngTemplateOutlet]="linkTypeTpl"
@@ -40,7 +40,7 @@
   </a>
 </ng-template>
 
-<ng-template #dropdownLink2 let-menuItem>
+<ng-template #dropdownLink let-menuItem>
   <button class="menu-heading menu-toggle" matRipple [matRippleDisabled]="!ripple"
   (click)="dropdownExpand(menuItem)">
     <ng-container

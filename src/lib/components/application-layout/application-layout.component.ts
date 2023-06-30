@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
-import {eLayoutType, SubscriptionService} from '@abp/ng.core';
+import { eLayoutType, SubscriptionService } from '@abp/ng.core';
 import { collapseWithMargin, slideFromBottom } from '@abp/ng.theme.shared';
 import { MatSidenav, MatSidenavContent } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
@@ -36,10 +36,11 @@ export class ApplicationLayoutComponent implements AfterViewInit {
   static type = eLayoutType.application;
 
   @ViewChild('sidenav', { static: true }) sidenav!: MatSidenav;
+  @ViewChild('sidenavEnd', { static: true }) sidenavEnd!: MatSidenav;
   @ViewChild('content', { static: true }) content!: MatSidenavContent;
 
   options = this.service.options;
-
+  sideNavEndComponent = '';
   private layoutChangesSubscription = Subscription.EMPTY;
 
   get isOver(): boolean {
@@ -77,8 +78,7 @@ export class ApplicationLayoutComponent implements AfterViewInit {
     private breakpointObserver: BreakpointObserver,
     @Optional() @Inject(DOCUMENT) private document: Document,
     @Inject(Directionality) public dir: AppDirectionality
-    ) {
-
+  ) {
     this.dir.value = this.options.dir;
     this.document.body.dir = this.dir.value;
 
@@ -108,12 +108,11 @@ export class ApplicationLayoutComponent implements AfterViewInit {
 
     // Initialize project theme with options
     this.receiveOptions(this.options);
-    }
+  }
 
   ngAfterViewInit() {
     this.service.subscribeWindowSize();
   }
-
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe();
@@ -172,5 +171,10 @@ export class ApplicationLayoutComponent implements AfterViewInit {
   toggleDirection(options: AppSettings) {
     this.dir.value = options.dir;
     this.document.body.dir = this.dir.value;
+  }
+
+  sideNavEndOpen(component: string) {
+    this.sideNavEndComponent = component;
+    this.sidenavEnd.toggle();
   }
 }

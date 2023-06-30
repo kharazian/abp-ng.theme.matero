@@ -10,8 +10,6 @@ import {
 } from '@angular/core';
 import { ABP, RoutesService, TreeNode } from '@abp/ng.core';
 
-// import { MenuService } from '@core';
-
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',

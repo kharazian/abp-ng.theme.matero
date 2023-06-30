@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 })
 export class CustomizerComponent implements OnInit, OnDestroy {
   @Output() optionsChange = new EventEmitter<AppSettings>();
-  @ViewChild('customizerPanel') customizerPanel: MatSidenav;
+  @Output() closePanel = new EventEmitter();
 
   options = this.layoutService.options;
 
@@ -68,12 +68,6 @@ export class CustomizerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-  }
-
-  closePanel() {
-    if (this.customizerPanel.opened) {
-      this.customizerPanel.close();
-    }
   }
 
   sendOptions(options: AppSettings) {
