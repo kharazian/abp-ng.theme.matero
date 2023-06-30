@@ -1,7 +1,7 @@
 <ng-template #loginBtn>
-  <a role="button" class="nav-link pointer" (click)="navigateToLogin()">{{
-    'AbpAccount::Login' | abpLocalization
-  }}</a>
+  <button mat-button class="r-full pointer" (click)="navigateToLogin()">
+    <strong class="m-x-8"> {{ 'AbpAccount::Login' | abpLocalization }}</strong>
+  </button>
 </ng-template>
 <ng-container *ngIf="(currentUser$ | async)?.isAuthenticated; else loginBtn">
   <button class="r-full" mat-button [matMenuTriggerFor]="menu">
