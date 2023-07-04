@@ -4,7 +4,7 @@
   "homepage": "https://abp.io",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abpframework/abp.git"
+    "url": "https://github.com/kharazian/abp-ng.theme.matero.git"
   },
   "dependencies": {
     "@abp/ng.account.core": "~7.2.2",
