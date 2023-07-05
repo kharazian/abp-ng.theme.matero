@@ -27,7 +27,10 @@
       [ngTemplateOutletContext]="{ $implicit: menuItem }"
     >
     </ng-container>
-    <app-topmenu-panel #submenu [items]="menuItem.children!"> </app-topmenu-panel>
+
+    <ng-container *ngIf="menuItem.children.length > 0">
+      <app-topmenu-panel #submenu [items]="menuItem.children!"> </app-topmenu-panel>
+    </ng-container>
   </button>
 </ng-template>
 

@@ -8,10 +8,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { MatMenu } from '@angular/material/menu';
-import { NavigationEnd, Router, RouterLinkActive } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { TopmenuState } from './topmenu.component';
 import { ABP, RoutesService, TreeNode } from '@abp/ng.core';
 
 @Component({
