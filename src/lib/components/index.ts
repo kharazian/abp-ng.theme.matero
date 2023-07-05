@@ -3,6 +3,7 @@ export * from './account-layout/auth-wrapper/auth-wrapper.component';
 export * from './account-layout/tenant-box/tenant-box.component';
 export * from './application-layout/application-layout.component';
 export * from './empty-layout/empty-layout.component';
+export * from './header/header.component'
 export * from './logo/logo.component';
 export * from './nav-items/current-user.component';
 export * from './nav-items/languages.component';
