@@ -13,7 +13,7 @@
   <!-- Header Above -->
   <app-header *ngIf="options.showHeader && options.headerPos === 'above'"
               (toggleSidenav)="sidenav.toggle()"
-              (toggleSidenavNotice)="sidenavNotice.toggle()"
+              (toggleSidenavNotice)="sideNavEndOpen('notice')"
               [showBranding]="true">
   </app-header>
 
@@ -33,7 +33,7 @@
 
     <mat-sidenav #sidenavEnd position="end" mode="over">
       <app-sidebar-notice *ngIf="sideNavEndComponent == 'notice'"></app-sidebar-notice>
-      <app-customizer *ngIf="sideNavEndComponent == 'customizer'" (optionsChange)="receiveOptions($event)" (closePanel)="customizerPanel.toggle()"></app-customizer>
+      <app-customizer *ngIf="sideNavEndComponent == 'customizer'" (optionsChange)="receiveOptions($event)" (closePanel)="sidenavEnd.toggle()"></app-customizer>
     </mat-sidenav>
 
     <mat-sidenav-content #content class="crm-content-wrap">

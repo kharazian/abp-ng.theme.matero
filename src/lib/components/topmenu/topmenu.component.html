@@ -20,17 +20,14 @@
   </button>
 </ng-template>
 
-<ng-template #dropdownLink let-menuItem>
+<ng-template #dropdownLink let-menuItem >
   <button mat-button [matMenuTriggerFor]="submenu.menuPanel">
     <ng-container
       [ngTemplateOutlet]="linkTypeTpl"
       [ngTemplateOutletContext]="{ $implicit: menuItem }"
     >
     </ng-container>
-
-    <ng-container *ngIf="menuItem.children.length > 0">
-      <app-topmenu-panel #submenu [items]="menuItem.children!"> </app-topmenu-panel>
-    </ng-container>
+    <app-topmenu-panel #submenu [items]="menuItem.children!"> </app-topmenu-panel>
   </button>
 </ng-template>
 

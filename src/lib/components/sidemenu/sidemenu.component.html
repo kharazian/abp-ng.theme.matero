@@ -17,7 +17,6 @@
       *ngFor="let menuItem of menuList; trackBy: trackByFn"
       class="menu-item"
       routerLinkActive="active"
-      [route]="menuItem.route"
       [type]="menuItem.name"
       #crmDropdownToggle
     >
@@ -31,7 +30,7 @@
 </ng-template>
 
 <ng-template #defaultLink let-menuItem>
-  <a class="menu-heading" [routerLink]="[menuItem.path]" matRipple [matRippleDisabled]="!ripple">
+  <a class="menu-heading" [routerLink]="[menuItem.path]" matRipple>
     <ng-container
       [ngTemplateOutlet]="linkTypeTpl"
       [ngTemplateOutletContext]="{ $implicit: menuItem }"
@@ -40,9 +39,8 @@
   </a>
 </ng-template>
 
-<ng-template #dropdownLink let-menuItem>
-  <button class="menu-heading menu-toggle" matRipple [matRippleDisabled]="!ripple"
-  (click)="dropdownExpand(menuItem)">
+<ng-template #dropdownLink let-menuItem let-level>
+  <button class="menu-heading menu-toggle" matRipple (click)="dropdownExpand(menuItem)">
     <ng-container
       [ngTemplateOutlet]="linkTypeTpl"
       [ngTemplateOutletContext]="{ $implicit: menuItem }"
