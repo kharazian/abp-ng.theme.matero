@@ -5,7 +5,7 @@
 </ng-template>
 <ng-container *ngIf="(currentUser$ | async)?.isAuthenticated; else loginBtn">
   <button class="r-full" mat-button [matMenuTriggerFor]="menu">
-    <img matButtonIcon class="avatar r-full" [src]="(currentUser$ | async)?.avatar || defaultAvatar" width="24" alt="avatar" />
+    <img matButtonIcon class="avatar r-full" [src]="defaultAvatar" width="24" alt="avatar" />
     <small *ngIf="(selectedTenant$ | async)?.name as tenantName"><i>{{ tenantName }}</i>\</small>
     <strong class="m-x-8">{{ (currentUser$ | async)?.userName }}</strong>
   </button>

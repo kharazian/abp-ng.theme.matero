@@ -5,7 +5,7 @@ import { Validation, ValidationErrorComponent as ErrorComponent } from '@ngx-val
   selector: 'abp-validation-error',
   template: `
     <div class="invalid-feedback" *ngFor="let error of abpErrors; trackBy: trackByFn">
-      {{ error.message | abpLocalization: error.interpoliteParams }}
+      {{ error.message | abpLocalization: error['interpoliteParams'] }}
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

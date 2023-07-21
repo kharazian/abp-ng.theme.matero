@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
     <div class="crm-user-panel">
       <img
         class="crm-user-panel-avatar"
-        [src]="(currentUser$ | async)?.avatar || './assets/images/avatar.jpg'"
+        [src]="'./assets/images/avatar.jpg'"
         alt="avatar"
         width="64"
       />
