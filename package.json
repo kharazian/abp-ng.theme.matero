@@ -7,8 +7,8 @@
     "url": "https://github.com/kharazian/abp-ng.theme.matero.git"
   },
   "dependencies": {
-    "@abp/ng.account.core": "~7.3.3",
-    "@abp/ng.theme.shared": "~7.3.3",
+    "@abp/ng.account.core": "~7.4.1",
+    "@abp/ng.theme.shared": "~7.4.1",
     "tslib": "^2.0.0"
   },
   "publishConfig": {
