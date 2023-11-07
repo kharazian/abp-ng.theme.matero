@@ -26,7 +26,9 @@ export class SidemenuComponent {
 
   trackByFn: TrackByFunction<TreeNode<ABP.Route>> = (_, item) => item.name;
 
-  constructor(public readonly routesService: RoutesService, protected renderer: Renderer2) {}
+  constructor(public readonly routesService: RoutesService, protected renderer: Renderer2) {
+    routesService.visible$.subscribe(result => console.log(result));
+  }
 
   dropdownExpand(node: TreeNode<ABP.Route>) {
     this.rootDropdownExpand[node.name] = !this.rootDropdownExpand[node.name];
