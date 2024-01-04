@@ -8,15 +8,17 @@
 
   <ng-template #defaultLink let-route>
     <li class="nav-item" *abpPermission="route.requiredPolicy">
-      <a class="nav-link" [routerLink]="[route.path]"
-        ><i *ngIf="route.iconClass" [ngClass]="route.iconClass"></i>
-        {{ route.name | abpLocalization }}</a
-      >
+      <a class="nav-link" [routerLink]="[route.path]">
+        @if (route.iconClass) {
+          <i [ngClass]="route.iconClass"></i>
+        }
+        {{ route.name | abpLocalization }}
+      </a>
     </li>
   </ng-template>
 
   <ng-template #dropdownLink let-route>
-    <ng-container *ngIf="route.children?.length">
+    @if (route.children?.Length) {
       <li
         class="nav-item dropdown"
         display="static"
@@ -34,7 +36,9 @@
           aria-expanded="false"
           href="javascript:void(0)"
         >
-          <i *ngIf="route.iconClass" [ngClass]="route.iconClass"></i>
+          @if (route.iconClass) {
+            <i [ngClass]="route.iconClass"></i>
+          }
           {{ route.name | abpLocalization }}
         </a>
         <div
@@ -48,7 +52,7 @@
           ></ng-container>
         </div>
       </li>
-    </ng-container>
+    }
   </ng-template>
 
   <ng-template #forTemplate let-route>
@@ -61,14 +65,16 @@
   </ng-template>
 
   <ng-template #defaultChild let-child>
-    <ng-container *ngIf="child.path">
+    @if (child.path) {
       <div class="dropdown-submenu" *abpPermission="child.requiredPolicy">
         <a class="dropdown-item" [routerLink]="[child.path]" (click)="closeDropdown()">
-          <i *ngIf="child.iconClass" [ngClass]="child.iconClass"></i>
+          @if (child.iconClass) {
+            <i [ngClass]="child.iconClass"></i>
+          }
           {{ child.name | abpLocalization }}</a
         >
       </div>
-    </ng-container>
+    }
   </ng-template>
 
   <ng-template #dropdownChild let-child>
@@ -86,7 +92,9 @@
           role="button"
           class="btn d-block text-start dropdown-toggle"
         >
-          <i *ngIf="child.iconClass" [ngClass]="child.iconClass"></i>
+          @if (child.iconClass) {
+            <i [ngClass]="child.iconClass"></i>
+          }
           {{ child.name | abpLocalization }}
         </a>
       </div>

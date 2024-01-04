@@ -1,39 +1,39 @@
-<mat-menu class="crm-topmenu-panel" *ngIf="items.length > 0">
-  <ng-container *ngFor="let item of items; let index = index">
-    <ng-container
-      *abpPermission="item.requiredPolicy || ''"
-      [ngTemplateOutlet]="isDropdown(item) ? dropdownLink : defaultLink"
-      [ngTemplateOutletContext]="{ $implicit: item }"
-    >
+@if (items.length > 0) {
+  <mat-menu class="crm-topmenu-panel">
+    <ng-container *ngFor="let item of items; let index = index">
+      <ng-container
+        *abpPermission="item.requiredPolicy || ''"
+        [ngTemplateOutlet]="isDropdown(item) ? dropdownLink : defaultLink"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      >
+      </ng-container>
     </ng-container>
-  </ng-container>
-</mat-menu>
+  </mat-menu>
+}
 
 <ng-template #defaultLink let-item>
   <button mat-menu-item [routerLink]="[item.path]">
-    <ng-container
-      [ngTemplateOutlet]="linkTypeTpl"
-      [ngTemplateOutletContext]="{ $implicit: item }"
-    >
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: item }">
     </ng-container>
   </button>
 </ng-template>
 
 <ng-template #dropdownLink let-item>
   <button mat-menu-item [matMenuTriggerFor]="submenu.menuPanel">
-    <ng-container
-      [ngTemplateOutlet]="linkTypeTpl"
-      [ngTemplateOutletContext]="{ $implicit: item }"
-    >
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: item }">
     </ng-container>
-  <app-topmenu-panel #submenu [items]="item.children!"> </app-topmenu-panel>
+    <app-topmenu-panel #submenu [items]="item.children!"> </app-topmenu-panel>
   </button>
 </ng-template>
 
 <ng-template #linkTypeTpl let-item>
-  <i class="menu-icon" *ngIf="!item.parent" [ngClass]="item.iconClass"></i>
+  @if (!item.parent) {
+    <i class="menu-icon" [ngClass]="item.iconClass"></i>
+  }
   <span class="menu-name">{{ item.name | abpLocalization }}</span>
-  <mat-icon class="menu-caret" *ngIf="!item.isLeaf">
-    {{ 'arrow_drop_down' }}
-  </mat-icon>
+  @if (!item.isLeaf) {
+    <mat-icon class="menu-caret">
+      {{ 'arrow_drop_down' }}
+    </mat-icon>
+  }
 </ng-template>

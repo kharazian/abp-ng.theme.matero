@@ -1,13 +1,16 @@
 <mat-toolbar class="crm-toolbar">
-  <button mat-icon-button *ngIf="showToggle" (click)="toggleSidenav.emit()">
-    <mat-icon>menu</mat-icon>
-  </button>
-
+  @if (showToggle) {
+    <button mat-icon-button (click)="toggleSidenav.emit()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
 
   <!-- app-branding -->
-  <ng-container *ngIf="showBranding">
-    <abp-logo *abpReplaceableTemplate="{ componentKey: service.logoComponentKey }"></abp-logo>
-  </ng-container>
+  @if (showBranding) {
+    <ng-container>
+      <abp-logo *abpReplaceableTemplate="{ componentKey: service.logoComponentKey }"></abp-logo>
+    </ng-container>
+  }
 
   <span class="flex-fill"></span>
 

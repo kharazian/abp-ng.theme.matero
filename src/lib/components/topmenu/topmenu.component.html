@@ -12,29 +12,27 @@
 
 <ng-template #defaultLink let-menuItem>
   <button mat-button [routerLink]="[menuItem.path]">
-    <ng-container
-      [ngTemplateOutlet]="linkTypeTpl"
-      [ngTemplateOutletContext]="{ $implicit: menuItem }"
-    >
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: menuItem }">
     </ng-container>
   </button>
 </ng-template>
 
-<ng-template #dropdownLink let-menuItem >
+<ng-template #dropdownLink let-menuItem>
   <button mat-button [matMenuTriggerFor]="submenu.menuPanel">
-    <ng-container
-      [ngTemplateOutlet]="linkTypeTpl"
-      [ngTemplateOutletContext]="{ $implicit: menuItem }"
-    >
+    <ng-container [ngTemplateOutlet]="linkTypeTpl" [ngTemplateOutletContext]="{ $implicit: menuItem }">
     </ng-container>
     <app-topmenu-panel #submenu [items]="menuItem.children!"> </app-topmenu-panel>
   </button>
 </ng-template>
 
 <ng-template #linkTypeTpl let-menuItem>
-  <i class="menu-icon" *ngIf="!menuItem.parent" [ngClass]="menuItem.iconClass"></i>
+  @if (!menuItem.parent) {
+    <i class="menu-icon" [ngClass]="menuItem.iconClass"></i>
+  }
   <span class="menu-name">{{ menuItem.name | abpLocalization }}</span>
-  <mat-icon class="menu-caret" *ngIf="!menuItem.isLeaf">
-    {{ 'arrow_drop_down' }}
-  </mat-icon>
+  @if (!menuItem.isLeaf) {
+    <mat-icon class="menu-caret">
+      {{ 'arrow_drop_down' }}
+    </mat-icon>
+  }
 </ng-template>

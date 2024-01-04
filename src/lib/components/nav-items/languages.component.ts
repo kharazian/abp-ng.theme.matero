@@ -6,11 +6,11 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'abp-languages',
   template: `
-    <ng-container *ngIf="((dropdownLanguages$ | async)?.length || 0) > 0">
+    @if (((dropdownLanguages$ | async)?.length || 0) > 0) {
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>translate</mat-icon>
       </button>
-    </ng-container>
+    }
     <mat-menu #menu="matMenu">
       <button mat-menu-item *ngFor="let lang of dropdownLanguages$ | async" (click)="onChangeLang(lang.cultureName || '')">
         <span [ngStyle]="{ color: (lang?.displayName === (defaultLanguage$ | async)) ? 'blue' : 'rgba(0,0,0,.54)' }">
