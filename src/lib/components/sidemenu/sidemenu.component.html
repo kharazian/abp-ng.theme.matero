@@ -10,7 +10,7 @@
 
 <ng-template #menuListTpl let-menuList="menuList" let-parentRoute="parentRoute" let-level="level">
   <ul class="crm-sidemenu level-{{ nodeLevel(menuList[0]) }}" [class.submenu]="!!menuList[0].parent">
-    <ng-container *ngFor="let menuItem of menuList; trackBy: trackByFn">
+    @for (menuItem of menuList; track menuItem) {
       @if (menuItem.children.length > 0 || menuItem.path) {
         <li class="menu-item" routerLinkActive="active" [type]="menuItem.name" #crmDropdownToggle>
           <ng-container
@@ -21,7 +21,7 @@
           </ng-container>
         </li>
       }
-    </ng-container>
+    }
   </ul>
 </ng-template>
 

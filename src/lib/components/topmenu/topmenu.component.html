@@ -1,12 +1,12 @@
 <nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <ng-container *ngFor="let menuItem of routesService.visible$ | async; trackBy: trackByFn">
+  @for (menuItem of routesService.visible$ | async; track menuItem) {
     <ng-container
       *abpPermission="menuItem.requiredPolicy || ''"
       [ngTemplateOutlet]="isDropdown(menuItem) ? dropdownLink : defaultLink"
       [ngTemplateOutletContext]="{ $implicit: menuItem }"
     >
     </ng-container>
-  </ng-container>
+  }
 </nav>
 <mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 

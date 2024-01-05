@@ -1,13 +1,13 @@
 @if (items.length > 0) {
   <mat-menu class="crm-topmenu-panel">
-    <ng-container *ngFor="let item of items; let index = index">
+    @for (item of items; track item; let i = $index) {
       <ng-container
         *abpPermission="item.requiredPolicy || ''"
         [ngTemplateOutlet]="isDropdown(item) ? dropdownLink : defaultLink"
         [ngTemplateOutletContext]="{ $implicit: item }"
       >
       </ng-container>
-    </ng-container>
+    }
   </mat-menu>
 }
 

@@ -9,10 +9,12 @@ import { Component } from '@angular/core';
 
     <mat-menu #menu="matMenu">
       <mat-nav-list>
-        <mat-list-item *ngFor="let message of messages">
-          <mat-icon class="m-x-16" matListItemIcon>info</mat-icon>
-          <a matListItemTitle href="#">{{ message }}</a>
-        </mat-list-item>
+        @for (message of messages; track message) {
+          <mat-list-item>
+            <mat-icon class="m-x-16" matListItemIcon>info</mat-icon>
+            <a matListItemTitle href="#">{{ message }}</a>
+          </mat-list-item>
+        }
       </mat-nav-list>
     </mat-menu>
   `,

@@ -12,11 +12,13 @@ import { map } from 'rxjs/operators';
       </button>
     }
     <mat-menu #menu="matMenu">
-      <button mat-menu-item *ngFor="let lang of dropdownLanguages$ | async" (click)="onChangeLang(lang.cultureName || '')">
-        <span [ngStyle]="{ color: (lang?.displayName === (defaultLanguage$ | async)) ? 'blue' : 'rgba(0,0,0,.54)' }">
-        {{ lang?.displayName}}
-        </span>
-      </button>
+      @for (lang of dropdownLanguages$ | async; track lang) {
+        <button mat-menu-item (click)="onChangeLang(lang.cultureName || '')">
+          <span [ngStyle]="{ color: (lang?.displayName === (defaultLanguage$ | async)) ? 'blue' : 'rgba(0,0,0,.54)' }">
+          {{ lang?.displayName}}
+          </span>
+        </button>
+      }
     </mat-menu>
   `,
 })

@@ -1,4 +1,4 @@
-<ng-container *ngFor="let alert of service.alerts$ | async; let i = index">
+@for (alert of service.alerts$ | async; track alert; let i = $index) {
   <div
     class="alert alert-{{ alert.type }} fade show"
     [ngClass]="{ 'alert-dismissible fade show': alert.dismissible }"
@@ -23,4 +23,4 @@
       ></button>
     }
   </div>
-</ng-container>
+}
